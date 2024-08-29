@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "name": "Çoban Salatı",
+        "description": "Təzə pomidor, xiyar və bibər ilə hazırlanan ənənəvi Türk salatı.",
+        "image": "/images/coban-salat.jpg",
+        "price": 12.99,
+        "category": "Salatlar"
+    },
+    {
+        "id": 2,
+        "name": "Sezar Salatı",
+        "description": "Romalı kahı, parmesan pendiri və kruton ilə hazırlanan Sezar salatı.",
+        "image": "/images/sezar.jpg",
+        "price": 14.99,
+        "category": "Salatlar"
+    },
+    {
+        "id": 3,
+        "name": "Pendirli Çörək Sandviç",
+        "description": "Qıtır çörək içində təzə pendir və tərəvəzlər ilə hazırlanan sandviç.",
+        "image": "/images/pendirli-sandwich.jpeg",
+        "price": 9.99,
+        "category": "Çörək Sandviç"
+    },
+    {
+        "id": 4,
+        "name": "Hinduşka Fümeli Çörək Sandviç",
+        "description": "Hinduşka füme və yaşıl tərəvəzlər ilə hazırlanan çörək sandviç.",
+        "image": "/images/hindi-sandwich.webp",
+        "price": 10.99,
+        "category": "Çörək Sandviç"
+    },
+    {
+        "id": 5,
+        "name": "Toyuqlu Roll Sandviç",
+        "description": "Toyuq parçaları və tərəvəzlər ilə dolu roll sandviç.",
+        "image": "/images/toyuqlu-sandwich.avif",
+        "price": 11.99,
+        "category": "Roll Sandviç"
+    },
+    {
+        "id": 6,
+        "name": "Tərəvəzli Roll Sandviç",
+        "description": "Müxtəlif təzə tərəvəzlər ilə hazırlanan roll sandviç.",
+        "image": "/images/terevezli-sandwich.jpg",
+        "price": 10.49,
+        "category": "Roll Sandviç"
+    },
+    {
+        "id": 7,
+        "name": "Klassik Klub Sandviç",
+        "description": "Üçqat klassik klub sandviç, toyuq, pomidor, kahı və mayonez ilə hazırlanmış.",
+        "image": "/images/club-snadwich.jpg",
+        "price": 15.99,
+        "category": "Klub Sandviç"
+    },
+    {
+        "id": 8,
+        "name": "Pastırmalı Klub Sandviç",
+        "description": "Pastırma, pendir və təzə tərəvəzlər ilə hazırlanmış klub sandviç.",
+        "image": "/images/pastirma-sandwich.jpg",
+        "price": 16.99,
+        "category": "Klub Sandviç"
+    },
+    {
+        "id": 9,
+        "name": "Pendirli Kruvasan Sandviç",
+        "description": "Kərəyağlı kruvasan içində pendir və təzə tərəvəzlər ilə hazırlanmış sandviç.",
+        "image": "/images/pendirli-kruvasan.webp",
+        "price": 13.49,
+        "category": "Kruvasan Sandviç"
+    },
+    {
+        "id": 10,
+        "name": "Jambonlu Kruvasan Sandviç",
+        "description": "Jambon və pendir dolu kruvasan sandviç.",
+        "image": "/images/jambonlu-sandwich.jpg",
+        "price": 14.49,
+        "category": "Kruvasan Sandviç"
+    }
+]

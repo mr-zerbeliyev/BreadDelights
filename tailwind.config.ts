@@ -13,6 +13,10 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'], // Inter'i varsayılan sans-serif fontu olarak ekleyin
+        roboto: ['Roboto Condensed', 'sans-serif'], // Roboto Condensed için özel bir sınıf oluşturun
+      },
     },
   },
   plugins: [],
