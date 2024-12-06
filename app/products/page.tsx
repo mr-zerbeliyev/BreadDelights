@@ -1,10 +1,12 @@
-import React from "react";
 import Card from "@/components/card/page";
+import React from "react";
 
-export default function Products() {
+
+export default function ProductsPage() {
   return (
     <div>
-      <Card />
+      <h1 className="text-center text-2xl font-bold my-4">Ürünler</h1>
+      <Card/>
     </div>
   );
 }

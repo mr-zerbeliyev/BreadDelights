@@ -16,16 +16,22 @@ export default function CardList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("Hepsi");
 
-  // Veri çekme işlemi useEffect içine alınmalı
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     fetch("/Data/product.json")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data); // Veriyi loglamak için
-        setProducts(data as Product[]);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Veri yüklenemedi.");
+        }
+        return response.json();
       })
-      .catch((error) => console.error("Veri çekilirken hata oluştu:", error));
-  }, []); // [] dependency array eklenerek sadece bir kere çalışması sağlanır
+      .then((data) => setProducts(data as Product[]))
+      .catch((error) => {
+        console.error("Veri çekilirken hata oluştu:", error);
+        setError("Veriler yüklenemedi. Lütfen daha sonra tekrar deneyin.");
+      });
+  }, []);
 
   const filteredProducts =
     selectedCategory === "Hepsi"
@@ -74,13 +80,14 @@ export default function CardList() {
             key={product.id}
             className="w-[360px] h-[470px] rounded-sm shadow-md hover:bg-slate-50 cursor-pointer group"
           >
-            <Link key={product.id} href={`/product/${product.id}`}>
+            <Link href={`/product/${product.id}`}>
               <Image
                 src={product.image}
                 alt={product.name}
-                className="cursor-pointer w-[360px] h-[360px] object-cover object-center rounded-t-sm transition-opacity duration-300 ease-in-out group-hover:opacity-70"
                 width={360}
                 height={360}
+                className="cursor-pointer w-[360px] h-[360px] object-cover object-center rounded-t-sm transition-opacity duration-300 ease-in-out group-hover:opacity-70"
+                loading="lazy"
               />
             </Link>
 
