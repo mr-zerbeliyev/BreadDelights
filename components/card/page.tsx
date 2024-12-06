@@ -16,13 +16,16 @@ export default function CardList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("Hepsi");
 
-  fetch("/Data/product.json")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    setProducts(data as Product[]);
-  })
-  .catch((error) => console.error("Veri çekilirken hata oluştu:", error));
+  // Veri çekme işlemi useEffect içine alınmalı
+  useEffect(() => {
+    fetch("/Data/product.json")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); // Veriyi loglamak için
+        setProducts(data as Product[]);
+      })
+      .catch((error) => console.error("Veri çekilirken hata oluştu:", error));
+  }, []); // [] dependency array eklenerek sadece bir kere çalışması sağlanır
 
   const filteredProducts =
     selectedCategory === "Hepsi"
