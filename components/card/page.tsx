@@ -15,21 +15,25 @@ interface Product {
 export default function CardList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("Hepsi");
-
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
 
   useEffect(() => {
     fetch("/Data/product.json")
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Veri yüklenemedi.");
+          throw new Error("Veri yüklenemedi");
         }
         return response.json();
       })
-      .then((data) => setProducts(data as Product[]))
+      .then((data) => {
+        setProducts(data); // Veriyi state'e kaydet
+        setLoading(false);  // Yükleme durumu bitti
+      })
       .catch((error) => {
-        console.error("Veri çekilirken hata oluştu:", error);
-        setError("Veriler yüklenemedi. Lütfen daha sonra tekrar deneyin.");
+        setError(error.message); // Hata durumunu set et
+        setLoading(false);
       });
   }, []);
 
@@ -73,7 +77,6 @@ export default function CardList() {
         </button>
       </div>
 
-      {/* Ürün Kartları */}
       <div className="flex flex-wrap justify-center gap-6">
         {filteredProducts.map((product) => (
           <div
