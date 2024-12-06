@@ -13,6 +13,8 @@ export default function ProductId() {
     return <div>Ürün bulunamadı!</div>;
   }
 
+
+
   return (
     <div className="relative">
       <Image src="/images/croissant.jpg" alt="alt" width={1920} height={500} className="h-screen" />
