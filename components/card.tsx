@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,32 +12,12 @@ interface Product {
   category: string;
 }
 
-export default function Card() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("Hepsi");
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+interface CardProps {
+  products: Product[]; // Ürünleri props ile al
+}
 
-  useEffect(() => {
-    fetch("/Data/product.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Veri yüklenemedi");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (!Array.isArray(data)) {
-          throw new Error("Geçersiz veri formatı");
-        }
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
+export default function Card({ products }: CardProps) {
+  const [selectedCategory, setSelectedCategory] = React.useState<string>("Hepsi");
 
   const categories = ["Hepsi", ...new Set(products.map((p) => p.category))];
 
@@ -45,14 +25,6 @@ export default function Card() {
     selectedCategory === "Hepsi"
       ? products
       : products.filter((product) => product.category === selectedCategory);
-
-  if (loading) {
-    return <div className="text-center mt-10">Yükleniyor...</div>;
-  }
-
-  if (error) {
-    return <div className="text-center mt-10 text-red-600">Hata: {error}</div>;
-  }
 
   return (
     <div className="mt-10">
@@ -73,7 +45,7 @@ export default function Card() {
       </div>
 
       <div className="flex flex-wrap justify-center gap-6">
-        {filteredProducts.map((product, index) => (
+        {filteredProducts.map((product) => (
           <div
             key={product.id}
             className="w-[360px] h-[470px] rounded-sm shadow-md hover:bg-slate-50 cursor-pointer group"
