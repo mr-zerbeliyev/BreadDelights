@@ -5,8 +5,7 @@ import React from "react";
 
 // Sunucu tarafında veri çeken async fonksiyon
 async function getProducts(): Promise<Product[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"; // Fallback URL
-  const res = await fetch(`${baseUrl}/Data/product.json`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Data/product.json`);
   
   if (!res.ok) {
     throw new Error("Veri çekilemedi");
