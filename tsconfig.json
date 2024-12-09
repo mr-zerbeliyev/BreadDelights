@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es2015", // ES6 standartlarını hedefler
+    "lib": ["dom", "es2015"], // ES6 özelliklerini ve DOM API'lerini destekler
+    "downlevelIteration": true, 
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,

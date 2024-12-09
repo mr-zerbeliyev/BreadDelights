@@ -12,12 +12,11 @@ interface Product {
   category: string;
 }
 
-export default function CardList() {
+export default function Card() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("Hepsi");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
 
   useEffect(() => {
     fetch("/Data/product.json")
@@ -28,57 +27,53 @@ export default function CardList() {
         return response.json();
       })
       .then((data) => {
-        setProducts(data); // Veriyi state'e kaydet
-        setLoading(false);  // Yükleme durumu bitti
+        if (!Array.isArray(data)) {
+          throw new Error("Geçersiz veri formatı");
+        }
+        setProducts(data);
+        setLoading(false);
       })
       .catch((error) => {
-        setError(error.message); // Hata durumunu set et
+        setError(error.message);
         setLoading(false);
       });
   }, []);
+
+  const categories = ["Hepsi", ...new Set(products.map((p) => p.category))];
 
   const filteredProducts =
     selectedCategory === "Hepsi"
       ? products
       : products.filter((product) => product.category === selectedCategory);
 
+  if (loading) {
+    return <div className="text-center mt-10">Yükleniyor...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center mt-10 text-red-600">Hata: {error}</div>;
+  }
+
   return (
     <div className="mt-10">
       <div className="flex justify-center mb-4">
-        <button
-          className={`px-4 py-2 mr-2 ${
-            selectedCategory === "Hepsi"
-              ? "bg-[#795757] text-white"
-              : "bg-[#A79277]"
-          }`}
-          onClick={() => setSelectedCategory("Hepsi")}
-        >
-          Hepsi
-        </button>
-        <button
-          className={`px-4 py-2 mr-2 ${
-            selectedCategory === "Salatlar"
-              ? "bg-[#795757] text-white"
-              : "bg-[#A79277]"
-          }`}
-          onClick={() => setSelectedCategory("Salatlar")}
-        >
-          Salatlar
-        </button>
-        <button
-          className={`px-4 py-2 mr-2 ${
-            selectedCategory === "Çörək Sandviç"
-              ? "bg-[#795757] text-white"
-              : "bg-[#A79277]"
-          }`}
-          onClick={() => setSelectedCategory("Çörək Sandviç")}
-        >
-          Sandviçlər
-        </button>
+        {categories.map((category) => (
+          <button
+            key={category}
+            className={`px-4 py-2 mr-2 ${
+              selectedCategory === category
+                ? "bg-[#795757] text-white"
+                : "bg-[#A79277]"
+            }`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
       </div>
 
       <div className="flex flex-wrap justify-center gap-6">
-        {filteredProducts.map((product) => (
+        {filteredProducts.map((product, index) => (
           <div
             key={product.id}
             className="w-[360px] h-[470px] rounded-sm shadow-md hover:bg-slate-50 cursor-pointer group"
